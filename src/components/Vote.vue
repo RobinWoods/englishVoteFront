@@ -11,6 +11,7 @@ export default {
       scriptSelected: null,
       actorSelected: null,
       videoSelected: null,
+      returnData: null
     }
   },
   components:{
@@ -19,13 +20,19 @@ export default {
   },
   methods:{
     sendPoll(dataToSend, route){
-      const apiUrl= `http://localhost:3333/${route}`;
+      const apiUrl= `/${route}`;
       axios.post(apiUrl, {
         videoId: dataToSend,
-        actorLastName: dataToSend
+        actorLastName: dataToSend,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials : "include",
+        mode: 'cors'
       })
           .then(response => {
-            this.test = response.data
+            this.returnData = response.data
           })
           .catch(error => {
             console.log(error);
@@ -42,7 +49,7 @@ export default {
     },
   },
   created() {
-    const apiVideoUrl= "http://localhost:3333/video";
+    const apiVideoUrl= "/video";
     axios.get(apiVideoUrl)
         .then(response => {
           this.videos = response.data;
@@ -50,7 +57,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    const apiActorUrl= "http://localhost:3333/actor";
+    const apiActorUrl= "/actor";
     axios.get(apiActorUrl)
         .then(response => {
           this.actors = response.data;
@@ -65,6 +72,7 @@ export default {
 <template>
   <div>
     <h1>Vote Page</h1>
+    {{returnData}}
 
     <div id="videoVote">
       <h2>Video Vote</h2>

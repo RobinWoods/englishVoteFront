@@ -17,7 +17,7 @@ export default {
   method:{
   },
   created(){
-    const actorApiUrl= "http://localhost:3333/actor";
+    const actorApiUrl= "/actor";
     axios.get(actorApiUrl)
         .then(response => {
           this.actors = response.data;
@@ -25,7 +25,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    const videoApiUrl= "http://localhost:3333/video";
+    const videoApiUrl= "/video";
     axios.get(videoApiUrl)
         .then(response => {
           this.videos = response.data;
