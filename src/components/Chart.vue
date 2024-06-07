@@ -15,7 +15,7 @@ export default {
       data: {
         labels: this.apiLabel,
         datasets: [{
-          backgroundColor: ['#FF6633', '#FFB399', '#FF33FF', "#FFB591"],
+          backgroundColor: ['#FF6633', '#FFB399', '#FF33FF', "#FFB591", '#F32940', '#FF5733'],
           data: this.apiData
         }]
       },

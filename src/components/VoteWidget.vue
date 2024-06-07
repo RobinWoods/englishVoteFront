@@ -1,23 +1,24 @@
 <script>
 export default {
   name: "VoteWidget",
-  props:["video", "actor", "isSelected"],
+  props:["video", "actor", "isSelected", "isVoted", "testCookie"],
   methods:{
     voteVideo() {
       this.$emit("click", this.video.videoId);
     },
     voteActor() {
-      this.$emit("click", this.actor.actorLastName);
+      this.$emit("click", this.actor.actorId);
     },
-  }
+  },
 }
 </script>
 
 <template>
-  <div class="voteWidget" v-if="!video" @click="voteActor" :class="{'selected' : isSelected}">
+
+  <div class="voteWidget" v-if="!video" @click="voteActor" :class="{'selected' : isSelected , 'voted' : isVoted}">
     <h2>{{actor.actorFirstName}} {{actor.actorLastName}}</h2>
   </div>
-  <div class="voteWidget" v-if="!actor" @click="voteVideo" :class="{'selected' : isSelected}">
+  <div class="voteWidget" v-if="!actor" @click="voteVideo" :class="{'selected' : isSelected , 'voted' : isVoted}">
     <h1>{{video.videoName}}</h1>
     <h2>{{video.teamName}}</h2>
     <h2>{{video.videoLink}}</h2>
@@ -36,10 +37,21 @@ export default {
   text-align: center;
   border-radius: 5px;
 }
+
+/*.voteWidget:hover{
+  border: 5px solid #397eeb;
+}*/
+
 .selected {
   border-color: white;
   background-color: #397eeb;
   color: white;
+}
+
+.voted{
+  background-color: #fae059;
+  color: black;
+  border-color: white;
 }
 
 </style>

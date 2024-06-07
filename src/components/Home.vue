@@ -1,7 +1,6 @@
 <script>
 import axios from "axios";
 import Result from "@/components/Result.vue";
-import Chart from "@/components/Chart.vue";
 export default {
   name: "Home",
   components: {

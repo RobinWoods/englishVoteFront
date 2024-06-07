@@ -1,6 +1,5 @@
 <script>
 import VoteWidget from "@/components/VoteWidget.vue";
-import axios from "axios";
 export default {
   name: "Selector",
   components:{
@@ -9,15 +8,18 @@ export default {
   data(){
     return{
       selectedOption: null,
+      test : 'test'
     }
   },
-  props:["videos", "actors"],
+  props:["videos", "actors", "cookie"],
   methods:{
     selectOption(option){
-      this.selectedOption = option;
-      this.$emit('selected', option);
+      if(!this.cookie) {
+        this.selectedOption = this.selectedOption === option ? null : option
+        this.$emit('selected', option);
+      }
     },
-  }
+  },
 }
 </script>
 
@@ -28,6 +30,7 @@ export default {
       @click="selectOption(video.videoId)"
       :video="video"
       :is-selected="selectedOption === video.videoId"
+      :is-voted="parseInt(cookie) === video.videoId"
       class="option-wrapper"
   />
   <VoteWidget
@@ -36,6 +39,7 @@ export default {
       @click="selectOption(actor.actorId)"
       :actor="actor"
       :is-selected="selectedOption === actor.actorId"
+      :is-voted="parseInt(cookie) === actor.actorId"
       class="option-wrapper"
   />
 </template>
