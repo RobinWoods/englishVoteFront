@@ -6,6 +6,7 @@ export default {
   data(){
     return {
       videos: [],
+      actors: []
     }
   },
   components:{
@@ -26,10 +27,18 @@ export default {
     },
   },
   created() {
-    const apiUrl= "http://localhost:3333/video";
-    axios.get(apiUrl)
+    const apiVideoUrl= "http://localhost:3333/video";
+    axios.get(apiVideoUrl)
         .then(response => {
           this.videos = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    const apiActorUrl= "http://localhost:3333/actor";
+    axios.get(apiActorUrl)
+        .then(response => {
+          this.actors = response.data;
         })
         .catch(error => {
           console.log(error);
@@ -41,7 +50,22 @@ export default {
 <template>
   <div>
     <h1>Vote Page</h1>
-    <VoteWidget v-for="video in videos" :video="video" />
+
+    <div id="videoVote">
+      <h2>Video Vote</h2>
+      <VoteWidget v-for="video in videos" :video="video"/>
+    </div>
+
+    <div id="scriptVote">
+      <h2>Script Vote</h2>
+      <VoteWidget v-for="video in videos" :video="video"/>
+    </div>
+
+    <div id="actorVote">
+      <h2>Actor Vote</h2>
+      <VoteWidget v-for="actor in actors" :actor="actor"/>
+    </div>
+
   </div>
 </template>
 

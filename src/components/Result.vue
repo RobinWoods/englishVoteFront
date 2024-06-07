@@ -65,13 +65,16 @@ export default {
 
 <style scoped>
 .resultWidget{
-  border: 1px solid black;
-  margin: 10px;
-  padding: 10px;
-  width: 200px;
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 </style>

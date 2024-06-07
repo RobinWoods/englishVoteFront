@@ -1,12 +1,15 @@
 <script>
 export default {
   name: "VoteWidget",
-  props:["video"]
+  props:["video", "actor"]
 }
 </script>
 
 <template>
-  <div class="voteWidget">
+  <div class="voteWidget" v-if="!video">
+    <h2>{{actor.actorFirstName}} {{actor.actorLastName}}</h2>
+  </div>
+  <div class="voteWidget" v-if="!actor">
     <h1>{{video.videoName}}</h1>
     <h2>{{video.teamName}}</h2>
     <h2>{{video.videoLink}}</h2>
