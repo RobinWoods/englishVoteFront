@@ -9,7 +9,7 @@ import Vote from "@/components/Vote.vue";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:3333';
+axios.defaults.baseURL = import.meta.env.VITE_APP_API_BASE_URL;
 const routes = [
     {path : '/', component: Home},
     {path : '/admin', component: Admin},
