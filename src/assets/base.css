@@ -21,6 +21,104 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-BoldItalic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Book.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-BookItalic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-HeavyItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-SemiboldItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-Thin.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CooperHewitt';
+  src: url('./fonts/CooperHewitt-ThinItalic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+
 /* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
