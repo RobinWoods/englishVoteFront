@@ -1,7 +1,12 @@
 <script>
+import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
+import 'vue-lite-youtube-embed/style.css'
 export default {
   name: "VoteWidget",
   props:["video", "actor", "isSelected", "isVoted", "testCookie"],
+  components:{
+    LiteYouTubeEmbed
+  },
   methods:{
     voteVideo() {
       this.$emit("click", this.video.videoId);
@@ -21,7 +26,16 @@ export default {
   <div class="voteWidget" v-if="!actor" @click="voteVideo" :class="{'selected' : isSelected , 'voted' : isVoted}">
     <h1>{{video.videoName}}</h1>
     <h2>{{video.teamName}}</h2>
-    <h2>{{video.videoLink}}</h2>
+    <LiteYouTubeEmbed
+        v-if="video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
+        :id="video.videoLink.slice(32)"
+        title="video.videoName"
+    />
+    <LiteYouTubeEmbed
+        v-if="!video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
+        id="dQw4w9WgXcQ"
+        title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
+    />
     <h3 v-for="actor in video.actors">{{actor.actorFirstName}} {{actor.actorLastName}}</h3>
   </div>
 </template>
