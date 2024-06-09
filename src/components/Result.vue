@@ -34,47 +34,178 @@ export default {
         return b.actorVote - a.actorVote
       })
       return winners
-    }
+    },
+    getImageUrl(index) {
+      if (index === 0) {
+        return 'https://img.icons8.com/?size=100&id=OGctPlBguZ47&format=png&color=000000';
+      } else if (index === 1) {
+        return 'https://img.icons8.com/?size=100&id=TY9dxXEoX0z8&format=png&color=000000';
+      } else if (index === 2) {
+        return 'https://img.icons8.com/?size=100&id=rdDTvbVAsMBN&format=png&color=000000';
+      }
+    },
   }
 }
 </script>
 
 <template>
   <div class="resultWidget">
-    <h2>{{request}}</h2>
-    <ul v-if="request === 'script'">
-      <li v-for="winner in getScriptWinners(winners).slice(0,3)" >
-        {{ winner.videoName }} | {{(winner.teamName)}} : {{winner.scriptVote}} votes
-      </li>
-      <Chart v-if="!loading" class="voteChart" :api-data="winners.map(winner => winner.scriptVote)" :api-label="winners.map(winner => winner.videoName)"/>
-    </ul>
-    <ul v-if="request ==='video'">
-      <li v-for="winner in getVideoWinners(winners).slice(0,3)" :key="winner.videoVote">
-        {{winner.videoName}} | {{(winner.teamName)}} : {{winner.videoVote}} votes
-      </li>
-      <Chart v-if="!loading" class="voteChart" :api-data="winners.map(winner => winner.videoVote)" :api-label="winners.map(winner => winner.videoName)"/>
-    </ul>
-    <ul v-if="request ==='actor'">
-      <li v-for="winner in getActorWinners(winners).slice(0,3)">
-        {{winner.actorFirstName}} {{(winner.actorLastName)}} : {{winner.actorVote}} votes
-      </li>
-      <Chart v-if="!loading" class="voteChart" :api-data="winners.map(winner => winner.actorVote)" :api-label="winners.map(winner => winner.actorFirstName + ' '+ winner.actorLastName )"/>
-    </ul>
-  </div>
+    <div class="title">{{request.toUpperCase()}}</div>
+    <div class="result">
+      <div class="resultContent">
+        
+        <div>
+          <div v-if="request === 'script'" class="list">
+            <div class="li" v-for="(winner, index) in getScriptWinners(winners).slice(0,3)" >
+              <div class="name">
+                <div class="team">{{ winner.videoName }} | {{(winner.teamName)}} </div>
+                <div class="vote"> {{winner.scriptVote}} votes</div>
+              </div>
+              <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
+            </div>
+          </div>
+          <div v-if="request ==='video'" class="list">
+            <div class="li"  v-for="(winner, index) in getVideoWinners(winners).slice(0,3)" :key="winner.videoVote">
+              <div class="name">
+                <div class="team">{{ winner.videoName }} | {{(winner.teamName)}}</div>
+                <div class="vote"> {{winner.scriptVote}} votes</div>
+              </div>
+              <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
+            </div>
+          </div>
+          <div v-if="request ==='actor'" class="list">
+            <div class="li" v-for="(winner, index) in getActorWinners(winners).slice(0,3)">
+              <div class="name">
+                <div class="team">{{winner.actorFirstName}} {{(winner.actorLastName)}}</div>
+                <div class="vote">{{winner.actorVote}} votes</div>
+              </div>
+              <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="resultChart">
+        <Chart v-if="!loading && request === 'script'" class="voteChart" :api-data="winners.map(winner => winner.scriptVote)" :api-label="winners.map(winner => winner.videoName)"/>
+        <Chart v-if="!loading && request === 'video'" class="voteChart" :api-data="winners.map(winner => winner.videoVote)" :api-label="winners.map(winner => winner.videoName)"/>
+        <Chart v-if="!loading && request === 'actor'" class="voteChart" :api-data="winners.map(winner => winner.actorVote)" :api-label="winners.map(winner => winner.actorFirstName + ' '+ winner.actorLastName )"/></div>
+      </div>
+    </div>
+
 </template>
 
 <style scoped>
 .resultWidget{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0.5em;
+  padding: 2em;
+  border-radius: 10px;
+
 }
+
+.team {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.resultContent {
+  flex: 1;
+}
+
+.resultChart {
+  flex: 0.5;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+.li {
+  background-color: #FFEDD6;
+  box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
+  padding: 1.5em;
+  border-radius: 1em;
+  width: 20em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  list-style-type: none;
+}
+
+.winner-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.vote {
+  font-size: 0.8em;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+@media (min-width: 425px) and (max-width: 760px) {
+  .li {
+    width: 20em;
+  }
+}
+
+@media (max-width: 760px){
+  .result{
+    flex-direction: column;
+  }
+
+  .li {
+    width: 20em;
+  }
+
+  .resultChart {
+    width: 313px;
+  }
+
+  .title{
+    margin: 0 auto 1em;
+  }
+}
+
+@media (min-width: 760px) {
+  .li {
+    width: 35vw;
+  }
+
+  .resultChart {
+    width: 50vw;
+  }
+}
+
+@media (max-width: 425px) {
+  .li {
+    width: 75vw;
+  }
+
+  .resultChart {
+    width: 80vw;
+  }
+}
+
 
 </style>

@@ -40,8 +40,7 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h1>Home Page</h1>
+  <div class="contents">
     <Result v-if="!loading" :winners="actors" request="actor"/>
     <Result v-if="!loading" :winners="videos" request="video"/>
     <Result v-if="!loading" :winners="videos" request="script"/>
@@ -49,5 +48,11 @@ export default {
 </template>
 
 <style scoped>
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-top: 7em;
+}
 
 </style>
