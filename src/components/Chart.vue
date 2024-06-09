@@ -15,15 +15,20 @@ export default {
       data: {
         labels: this.apiLabel,
         datasets: [{
-          backgroundColor: ['#FF6633', '#FFB399', '#FF33FF', "#FFB591", '#F32940', '#FF5733'],
+          backgroundColor: ['#FFE082', '#9FA8DA', '#FFAB91'].concat(new Array(this.apiData.length - 3).fill("#FFF6EB")),
           data: this.apiData
         }]
       },
       options: {
-        responsive: true
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
       }
     }
-  }
+}
 }
 </script>
 
