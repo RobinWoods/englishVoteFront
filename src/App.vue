@@ -42,29 +42,34 @@ export default {
 
 <template>
   <header >
-    <menu :style="{ '--decoration-left': decorationLeft, '--decoration-width': decorationWidth }">
-      <router-link
-          to="/vote"
-          :active-class="menuHovered ? '' : 'link'"
-          @mouseover="updateDecoration($event)"
-          @click="resetHover"
-      >
-        VOTE
-      </router-link>
-      <router-link
-          to="/"
-          :active-class="menuHovered ? '' : 'link'"
-          @mouseover="updateDecoration($event)"
-          @click="resetHover"
-      >
-        RESULT
-      </router-link>
-    </menu>
+    <white>
+      <color>
+        <menu :style="{ '--decoration-left': decorationLeft, '--decoration-width': decorationWidth }">
+          <router-link
+              to="/vote"
+              :active-class="menuHovered ? '' : 'link'"
+              @mouseover="updateDecoration($event)"
+              @click="resetHover"
+          >
+            VOTE
+          </router-link>
+          <router-link
+              to="/"
+              :active-class="menuHovered ? '' : 'link'"
+              @mouseover="updateDecoration($event)"
+              @click="resetHover"
+          >
+            RESULT
+          </router-link>
+        </menu>
+      </color>
+    </white>
+
   </header>
 
-  <div>
+  <contents>
     <router-view></router-view>
-  </div>
+  </contents>
   <footer>
 
   </footer>
@@ -72,20 +77,46 @@ export default {
 
 <style scoped>
   header {
+    margin: 1em 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
+  }
 
+  white {
+    background: linear-gradient(to bottom, white, white, white, white, white, white, white, rgba(255, 255, 255, 0.96), transparent, transparent);
+    width: 100%;
+    position: fixed;
+    height: 33%;
+  }
+
+  color {
+    background-color: #FFEDD6;
+    box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
+    width: 15em;
+    height: 3em;
+    padding-top: 1em;
+    border-radius: 3em;
+    margin: 9em auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  contents {
+    margin-top: 5em;
   }
 
   menu {
-    position: relative;
+    position: fixed;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 2em;
-    width: 10em;
+    width: 15em;
     padding: 0;
+    margin-bottom: 2em;
     --decoration-left: 50%;
     --decoration-width: 0;
   }
@@ -96,21 +127,21 @@ export default {
     bottom: 0;
     left: var(--decoration-left);
     width: var(--decoration-width);
-    height: 0.12em;
+    height: 0.16em;
     background: #181716;
     transition: 300ms;
   }
 
   a {
-    font-family: 'CooperHewitt', sans-serif;
     font-weight: 600;
     color: #181716;
     padding-bottom: .2em;
     text-decoration: none !important;
+    box-sizing: border-box;
   }
 
   .link {
-    border-bottom: 0.15em solid #181716;
+    border-bottom: 0.16em solid #181716;
   }
 
 </style>
