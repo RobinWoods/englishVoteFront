@@ -42,7 +42,6 @@ export default {
 
 <template>
   <header >
-    <white>
       <color>
         <menu :style="{ '--decoration-left': decorationLeft, '--decoration-width': decorationWidth }">
           <router-link
@@ -63,8 +62,6 @@ export default {
           </router-link>
         </menu>
       </color>
-    </white>
-
   </header>
 
   <contents>
@@ -77,18 +74,16 @@ export default {
 
 <style scoped>
   header {
-    margin: 1em 0;
     display: flex;
+    position: fixed;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-  }
-
-  white {
     background: linear-gradient(to bottom, white, white, white, white, white, white, white, rgba(255, 255, 255, 0.96), transparent, transparent);
-    width: 100%;
-    position: fixed;
-    height: 33%;
+    width: 100vw;
+    height: 18%;
+    top: 0;
+    left: 0;
   }
 
   color {
@@ -98,7 +93,6 @@ export default {
     height: 3em;
     padding-top: 1em;
     border-radius: 3em;
-    margin: 9em auto 0;
     display: flex;
     align-items: center;
     justify-content: center;
