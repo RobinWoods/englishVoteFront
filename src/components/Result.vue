@@ -53,7 +53,6 @@ export default {
     <div class="title">{{request.toUpperCase()}}</div>
     <div class="result">
       <div class="resultContent">
-        
         <div>
           <div v-if="request === 'script'" class="list">
             <div class="li" v-for="(winner, index) in getScriptWinners(winners).slice(0,3)" >
@@ -68,7 +67,7 @@ export default {
             <div class="li"  v-for="(winner, index) in getVideoWinners(winners).slice(0,3)" :key="winner.videoVote">
               <div class="name">
                 <div class="team">{{ winner.videoName }} | {{(winner.teamName)}}</div>
-                <div class="vote"> {{winner.scriptVote}} votes</div>
+                <div class="vote"> {{winner.videoVote}} votes</div>
               </div>
               <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
             </div>

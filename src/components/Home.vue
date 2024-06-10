@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import Result from "@/components/Result.vue";
+import {state, socket} from "@/socket.js"
 export default {
   name: "Home",
   components: {
@@ -10,29 +11,54 @@ export default {
     return {
       actors: [],
       videos: [],
-      loading: true
+      loading: true,
+      socketMessage: 'test'
     }
   },
-  method:{
+  methods:{
+    getActors(){
+      const actorApiUrl= "/actor";
+      axios.get(actorApiUrl)
+          .then(response => {
+            this.actors = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    },
+    getVideos(){
+      const videoApiUrl= "/video";
+      axios.get(videoApiUrl)
+          .then(response => {
+            this.videos = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    }
   },
   created(){
-    const actorApiUrl= "/actor";
-    axios.get(actorApiUrl)
-        .then(response => {
-          this.actors = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    const videoApiUrl= "/video";
-    axios.get(videoApiUrl)
-        .then(response => {
-          this.videos = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    this.getVideos();
+    this.getActors();
     this.loading = false;
+  },
+  computed: {
+    connected() {
+      return state.connected;
+    },
+  },
+  mounted() {
+    socket.on("actors", (message) => {
+      if(message === 'actor vote added'){
+        this.getActors();
+      }
+    });
+    socket.on("videos", (message) => {
+      this.socketMessage = message;
+      if(message === 'video vote added'){
+        this.getVideos();
+      }
+    });
 
   }
 
@@ -40,6 +66,7 @@ export default {
 </script>
 
 <template>
+
   <div class="contents">
     <Result v-if="!loading" :winners="actors" request="actor"/>
     <Result v-if="!loading" :winners="videos" request="video"/>
