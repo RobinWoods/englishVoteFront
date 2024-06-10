@@ -8,7 +8,7 @@ export const state = reactive({
 });
 
 // "undefined" means the URL will be computed from the `window.location` object
-const URL="http://localhost:3333";
+const URL=  import.meta.env.VITE_APP_API_BASE_URL;
 
 export const socket = io(URL);
 
