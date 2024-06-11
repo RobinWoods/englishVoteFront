@@ -110,12 +110,12 @@ export default {
     gap: 2em;
     width: 15em;
     padding: 0;
-    margin-bottom: 2em;
+    margin-bottom: 0.8em;
     --decoration-left: 50%;
     --decoration-width: 0;
   }
 
-  menu::after {
+  .menu::after {
     content: '';
     position: absolute;
     bottom: 0;
