@@ -42,8 +42,8 @@ export default {
 
 <template>
   <header >
-      <color>
-        <menu :style="{ '--decoration-left': decorationLeft, '--decoration-width': decorationWidth }">
+      <div class="color">
+        <div class="menu" :style="{ '--decoration-left': decorationLeft, '--decoration-width': decorationWidth }">
           <router-link
               to="/vote"
               :active-class="menuHovered ? '' : 'link'"
@@ -60,13 +60,13 @@ export default {
           >
             RESULT
           </router-link>
-        </menu>
-      </color>
+        </div>
+      </div>
   </header>
 
-  <contents>
+  <div class="content">
     <router-view></router-view>
-  </contents>
+  </div>
   <footer>
 
   </footer>
@@ -86,7 +86,7 @@ export default {
     left: 0;
   }
 
-  color {
+  .color {
     background-color: #FFEDD6;
     box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
     width: 15em;
@@ -98,11 +98,11 @@ export default {
     justify-content: center;
   }
 
-  contents {
+  .content {
     margin-top: 5em;
   }
 
-  menu {
+  .menu {
     position: fixed;
     display: flex;
     flex-direction: row;
