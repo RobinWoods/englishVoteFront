@@ -12,13 +12,6 @@ export default {
   props: ['apiData', 'apiLabel'],
   data(){
     return{
-      data: {
-        labels: this.apiLabel,
-        datasets: [{
-          backgroundColor: ['#FFE082', '#9FA8DA', '#FFAB91'].concat(new Array(this.apiData.length - 3).fill("#FFF6EB")),
-          data: this.apiData
-        }]
-      },
       options: {
         responsive: true,
         plugins: {
@@ -28,7 +21,18 @@ export default {
         }
       }
     }
-}
+  },
+  computed: {
+    data() {
+      return {
+        labels: this.apiLabel,
+        datasets: [{
+          backgroundColor: ['#FFE082', '#9FA8DA', '#FFAB91'].concat(new Array(this.apiData.length - 3).fill("#FFF6EB")),
+          data: this.apiData
+        }]
+      }
+    }
+  }
 }
 </script>
 

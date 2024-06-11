@@ -30,10 +30,11 @@ export default {
       const videoApiUrl= "/video";
       axios.get(videoApiUrl)
           .then(response => {
+            console.log('Video data:', response.data);
             this.videos = response.data;
           })
           .catch(error => {
-            console.log(error);
+            console.error('Error fetching video data:', error);
           });
     }
   },

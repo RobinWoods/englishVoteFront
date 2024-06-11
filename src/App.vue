@@ -4,6 +4,7 @@ export default {
     return {
       decorationLeft: '50%',
       decorationWidth: '0',
+      menuHovered: false,
     }
   },
   methods: {
@@ -25,10 +26,10 @@ export default {
         let activeLink;
         switch (this.$route.path) {
           case '/vote':
-            activeLink = this.$refs.voteLink.$el;
+            activeLink = this.$refs.voteLink ? this.$refs.voteLink.$el : null;
             break;
           case '/':
-            activeLink = this.$refs.resultLink.$el;
+            activeLink = this.$refs.resultLink ? this.$refs.resultLink.$el : null;
             break;
         }
         if (activeLink) {
