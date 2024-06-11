@@ -8,26 +8,28 @@ export default {
   },
   data(){
     return {
-      loading: true
+      loading: true,
+      scriptWinners: null,
+      videoWinners: null,
     }
   },
   watch:{
     winners(){
       this.loading = false
+      this.videoWinners = this.getVideoWinners(this.winners).slice(0,3);
+      this.scriptWinners = this.getScriptWinners(this.winners).slice(0,3);
     }
   },
   methods:{
     getScriptWinners(winners){
-      winners.sort((a,b) => {
+      return [...winners].sort((a,b) => {
         return b.scriptVote - a.scriptVote
       })
-      return winners
     },
     getVideoWinners(winners){
-      winners.sort((a,b) => {
+      return [...winners].sort((a,b) => {
         return b.videoVote - a.videoVote
       })
-      return winners
     },
     getActorWinners(winners) {
       winners.sort((a, b) => {
@@ -44,7 +46,7 @@ export default {
         return 'https://img.icons8.com/?size=100&id=rdDTvbVAsMBN&format=png&color=000000';
       }
     },
-  }
+  },
 }
 </script>
 
@@ -54,17 +56,17 @@ export default {
     <div class="result">
       <div class="resultContent">
         <div>
-          <div v-if="request === 'script'" class="list">
-            <div class="li" v-for="(winner, index) in getScriptWinners(winners).slice(0,3)" >
+          <div v-if="request ==='actor'" class="list">
+            <div class="li" v-for="(winner, index) in getActorWinners(winners).slice(0,3)">
               <div class="name">
-                <div class="team">{{ winner.videoName }} | {{(winner.teamName)}} </div>
-                <div class="vote"> {{winner.scriptVote}} votes</div>
+                <div class="team">{{winner.actorFirstName}} {{(winner.actorLastName)}}</div>
+                <div class="vote">{{winner.actorVote}} votes</div>
               </div>
               <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
             </div>
           </div>
           <div v-if="request ==='video'" class="list">
-            <div class="li"  v-for="(winner, index) in getVideoWinners(winners).slice(0,3)" :key="winner.videoVote">
+            <div class="li"  v-for="(winner, index) in videoWinners" :key="winner.videoVote">
               <div class="name">
                 <div class="team">{{ winner.videoName }} | {{(winner.teamName)}}</div>
                 <div class="vote"> {{winner.videoVote}} votes</div>
@@ -72,11 +74,11 @@ export default {
               <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
             </div>
           </div>
-          <div v-if="request ==='actor'" class="list">
-            <div class="li" v-for="(winner, index) in getActorWinners(winners).slice(0,3)">
+          <div v-if="request === 'script'" class="list">
+            <div class="li" v-for="(winner, index) in scriptWinners" >
               <div class="name">
-                <div class="team">{{winner.actorFirstName}} {{(winner.actorLastName)}}</div>
-                <div class="vote">{{winner.actorVote}} votes</div>
+                <div class="team">{{ winner.videoName }} | {{(winner.teamName)}} </div>
+                <div class="vote"> {{winner.scriptVote}} votes</div>
               </div>
               <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
             </div>
