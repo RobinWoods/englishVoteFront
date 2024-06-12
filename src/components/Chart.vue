@@ -1,11 +1,13 @@
 <script>
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
+import api from "js-cookie";
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default {
   name: "Chart",
+  methods: {api},
   components: {
     Doughnut
   },
@@ -29,7 +31,7 @@ export default {
         datasets: [{
           backgroundColor: ['#FFE082', '#9FA8DA', '#FFAB91'].concat(new Array(this.apiData.length - 3).fill("#FFF6EB")),
           data: this.apiData
-        }]
+        }],
       }
     }
   }
@@ -37,6 +39,7 @@ export default {
 </script>
 
 <template>
+  <h1 v-if="this.apiData.reduce((a, b) => a + b, 0) === 0">Waiting For Vote</h1>
   <Doughnut :data="data" :options="options" />
 </template>
 
