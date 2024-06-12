@@ -25,7 +25,6 @@ export default {
   </div>
   <div class="voteWidget" v-if="!actor" @click="voteVideo" :class="{'selected' : isSelected , 'voted' : isVoted}">
     <h1>{{video.videoName}}</h1>
-    <h2>{{video.teamName}}</h2>
     <LiteYouTubeEmbed
         v-if="video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
         :id="video.videoLink.slice(32)"

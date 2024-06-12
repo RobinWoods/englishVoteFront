@@ -68,7 +68,7 @@ export default {
           <div v-if="request ==='video'" class="list">
             <div class="li"  v-for="(winner, index) in videoWinners" :key="winner.videoVote">
               <div class="name">
-                <div class="team">{{ winner.videoName }} | {{(winner.teamName)}}</div>
+                <div class="team">{{ winner.videoName }}</div>
                 <div class="vote"> {{winner.videoVote}} votes</div>
               </div>
               <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
@@ -77,7 +77,7 @@ export default {
           <div v-if="request === 'script'" class="list">
             <div class="li" v-for="(winner, index) in scriptWinners" >
               <div class="name">
-                <div class="team">{{ winner.videoName }} | {{(winner.teamName)}} </div>
+                <div class="team">{{ winner.videoName }}</div>
                 <div class="vote"> {{winner.scriptVote}} votes</div>
               </div>
               <img :src="getImageUrl(index)" :alt="'Image for ' + winner.videoName" :class="['winner-image', 'winner-' + (index + 1)]" />
