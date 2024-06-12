@@ -87,8 +87,8 @@ export default {
 
       </div>
       <div class="resultChart">
-        <Chart v-if="!loading && request === 'script'" class="voteChart" :api-data="winners.map(winner => winner.scriptVote)" :api-label="winners.map(winner => winner.videoName)"/>
-        <Chart v-if="!loading && request === 'video'" class="voteChart" :api-data="winners.map(winner => winner.videoVote)" :api-label="winners.map(winner => winner.videoName)"/>
+        <Chart v-if="!loading && request === 'script'" class="voteChart" :api-data="scriptWinners.map(winner => winner.scriptVote)" :api-label="scriptWinners.map(winner => winner.videoName)"/>
+        <Chart v-if="!loading && request === 'video'" class="voteChart" :api-data="videoWinners.map(winner => winner.videoVote)" :api-label="videoWinners.map(winner => winner.videoName)"/>
         <Chart v-if="!loading && request === 'actor'" class="voteChart" :api-data="winners.map(winner => winner.actorVote)" :api-label="winners.map(winner => winner.actorFirstName + ' '+ winner.actorLastName )"/></div>
       </div>
     </div>
