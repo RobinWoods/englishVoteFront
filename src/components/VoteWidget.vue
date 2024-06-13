@@ -24,47 +24,67 @@ export default {
     <h2>{{actor.actorFirstName}} {{actor.actorLastName}}</h2>
   </div>
   <div class="voteWidget" v-if="!actor" @click="voteVideo" :class="{'selected' : isSelected , 'voted' : isVoted}">
-    <h1>{{video.videoName}}</h1>
-    <LiteYouTubeEmbed
-        v-if="video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
-        :id="video.videoLink.slice(32)"
-        title="video.videoName"
-    />
-    <LiteYouTubeEmbed
-        v-if="!video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
-        id="dQw4w9WgXcQ"
-        title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
-    />
-    <h3 v-for="actor in video.actors">{{actor.actorFirstName}} {{actor.actorLastName}}</h3>
+    <p class="videoTitle">{{video.videoName}}</p>
+    <div class="video-container">
+      <LiteYouTubeEmbed
+          v-if="video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
+          :id="video.videoLink.slice(32)"
+          title="video.videoName"
+      />
+      <LiteYouTubeEmbed
+          v-if="!video.videoLink.startsWith('https://www.youtube.com/watch?v=')"
+          id="dQw4w9WgXcQ"
+          title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
+      />
+    </div>
+    <p class="name" v-for="actor in video.actors">{{actor.actorFirstName}} {{actor.actorLastName}}</p>
   </div>
 </template>
 
 <style scoped>
 
 .voteWidget{
-  border: 1px solid black;
-  margin: 10px;
-  padding: 10px;
-  width: 200px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 5px;
+  background: #FFEDD6;
+  box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 23.47vw;
+  border-radius: 1em;
+
 }
 
-/*.voteWidget:hover{
-  border: 5px solid #397eeb;
-}*/
+.voteWidget:hover{
+ cursor: pointer;
+}
+
+.videoTitle{
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
 
 .selected {
-  border-color: white;
-  background-color: #397eeb;
-  color: white;
+  background-color: #FFE082FF;
+  box-shadow:  0 0 15px 4px rgba(255, 224, 130, 0.7);
 }
 
 .voted{
-  background-color: #fae059;
+  background-color: #FFE082FF;
+  box-shadow:  0 0 15px 4px rgba(255, 224, 130, 0.7);
   color: black;
-  border-color: white;
+}
+
+.video-container {
+  border-radius: .5em;
+  overflow: hidden;
+}
+
+.name {
+  font-size: 1em;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
 }
 
 </style>

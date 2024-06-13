@@ -47,11 +47,13 @@ export default {
 
 <style>
 
-
 .option-wrapper {
   cursor: pointer;
   border: 1px solid #ccc;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 </style>
