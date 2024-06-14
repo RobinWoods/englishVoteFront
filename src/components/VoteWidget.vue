@@ -44,8 +44,8 @@ export default {
 <style scoped>
 
 .voteWidget{
-  background: #FFEDD6;
-  box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
+  background-color: white;
+  box-shadow:  0 0 15px 4px rgba(243, 240, 239, 0.7);
   display: flex;
   flex-direction: column;
   padding: 2em;
@@ -65,8 +65,8 @@ export default {
 }
 
 .selected {
-  background-color: #FFE082FF;
-  box-shadow:  0 0 15px 4px rgba(255, 224, 130, 0.7);
+  background: #FFEDD6;
+  box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
 }
 
 .voted{
@@ -86,5 +86,34 @@ export default {
   margin-top: 1em;
   margin-bottom: 0;
 }
+
+@media (min-width: 1081px) and (max-width: 1300px) {
+  .voteWidget{
+    width: 22.43vw;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1081px) {
+  .voteWidget{
+    width: 34vw;
+  }
+}
+
+@media (max-width: 880px) {
+  .voteWidget{
+    width: 30vw;
+  }
+}
+
+@media (max-width: 681px) {
+  .voteWidget{
+    width: 120vw;
+  }
+
+  .videoTitle{
+   text-align: center;
+  }
+}
+
 
 </style>

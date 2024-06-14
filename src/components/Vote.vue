@@ -85,30 +85,28 @@ export default {
 <template>
   <div class="contents">
     <div id="videoVote" class="resultWidget">
-      <h2>VIDEO</h2>
+      <h2 class="title">VIDEO</h2>
       <div class="selected">
           <Selector :videos="videos" @selected="selectVideo($event)" :cookie="votes.videoVoted" />
       </div>
-      <button @click="sendPoll(videoSelected, 'video')" v-if="!votes.videoVoted">Submit</button>
-      <h2 v-if="votes.videoVoted">You have already voted for a video</h2>
+      <button @click="sendPoll(videoSelected, 'video')" :disabled="votes.videoVoted">Submit</button>
     </div>
 
     <div id="scriptVote" class="resultWidget">
-      <h2>SCRIPT</h2>
+      <h2 class="title">SCRIPT</h2>
       <div class="selected">
         <Selector :videos="videos" @selected="selectScript($event)" :cookie="votes.scriptVoted"/>
       </div>
-      <button @click="sendPoll(scriptSelected, 'script')" v-if="!votes.scriptVoted">Submit</button>
-      <h2 v-if="votes.scriptVoted">You have already voted for a script</h2>
+      <button @click="sendPoll(scriptSelected, 'script')" :disabled="votes.scriptVoted">Submit</button>
     </div>
 
     <div id="actorVote" class="resultWidget">
-      <h2>ACTOR</h2>
+      <h2 class="title">ACTOR</h2>
       <div class="selected">
           <Selector :actors="actors" @selected="selectActor($event)" :cookie="votes.actorVoted"/>
       </div>
-      <button @click="sendPoll(actorSelected, 'actor')" v-if="!votes.actorVoted">Submit</button>
-      <h2 v-if="votes.actorVoted">You have already voted for an actor</h2>
+      <button @click="sendPoll(actorSelected, 'actor')" :disabled="votes.actorVoted">Submit</button>
+
     </div>
 
   </div>
@@ -136,14 +134,14 @@ export default {
   flex-direction: row;
   gap: 1em;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 button {
-  background-color: white;
   border: none;
   color: #181716;
   margin: 4em auto 0;
-  width: 23.47vw;
+  width: 15em;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -152,13 +150,42 @@ button {
   cursor: pointer;
 
   transition-duration: 0.3s;
+  background: #FFEDD6;
+  box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
   border-radius: 12px;
-  box-shadow:  0 0 15px 4px rgba(243, 240, 239, 0.7);
+
 }
 
 button:hover {
   background-color: #FFEDD6;
   box-shadow:  0 0 15px 4px rgba(255, 237, 214, 0.7);
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #888;
+  box-shadow:  0 0 15px 4px rgba(243, 240, 239, 0.7);
+  cursor: not-allowed;
+}
+
+
+
+@media (max-width: 1081px) {
+  .selected {
+    gap: 7vw;
+  }
+}
+
+@media (max-width: 880px) {
+  .selected {
+    gap: 5vw;
+  }
+}
+
+@media (max-width: 760px) {
+  .title {
+    text-align: center;
+  }
 }
 
 </style>
