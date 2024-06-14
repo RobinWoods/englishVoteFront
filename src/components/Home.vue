@@ -68,9 +68,9 @@ export default {
 <template>
 
   <div class="contents">
-    <Result v-if="!loading" :winners="actors" request="actor"/>
     <Result v-if="!loading" :winners="videos" request="video"/>
     <Result v-if="!loading" :winners="videos" request="script"/>
+    <Result v-if="!loading" :winners="actors" request="actor"/>
   </div>
 </template>
 
