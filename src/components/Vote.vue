@@ -25,29 +25,34 @@ export default {
   },
   methods:{
     sendPoll(dataToSend, route){
-      const apiUrl= `/${route}`;
-      axios.post(apiUrl, {
-        videoId: dataToSend,
-        actorId: dataToSend,
-      })
-          .then(response => {
-            this.returnData = response.data
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      if(route === "video") {
-        localStorage.setItem('videoVoted', dataToSend);
+      if(!dataToSend){
+        return alert("Please select an option")
       }
-      else if(route === "script") {
-        localStorage.setItem('scriptVoted', dataToSend);
+      else{
+        const apiUrl= `/${route}`;
+        axios.post(apiUrl, {
+          videoId: dataToSend,
+          actorId: dataToSend,
+        })
+            .then(response => {
+              this.returnData = response.data
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        if(route === "video") {
+          localStorage.setItem('videoVoted', dataToSend);
+        }
+        else if(route === "script") {
+          localStorage.setItem('scriptVoted', dataToSend);
+        }
+        else if(route === "actor") {
+          localStorage.setItem('actorVoted', dataToSend);
+        }
+        this.votes.videoVoted = localStorage.getItem('videoVoted');
+        this.votes.scriptVoted = localStorage.getItem('scriptVoted');
+        this.votes.actorVoted = localStorage.getItem('actorVoted');
       }
-      else if(route === "actor") {
-        localStorage.setItem('actorVoted', dataToSend);
-      }
-      this.votes.videoVoted = localStorage.getItem('videoVoted');
-      this.votes.scriptVoted = localStorage.getItem('scriptVoted');
-      this.votes.actorVoted = localStorage.getItem('actorVoted');
     },
     selectVideo(videoId){
       this.videoSelected = videoId;
