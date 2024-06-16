@@ -19,10 +19,14 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd ~/englishVoteFront
+          npm install
 
       - name: Build the project
-        run: npm run build
+        run: |
+          cd ~/englishVoteFront
+          npm run build
 
       - name: Deploy to server
         env:
@@ -33,5 +37,5 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
-          rsync -avz -e "ssh -i private_key -o StrictHostKeyChecking=no" dist/ $USERNAME@$SERVER:$TARGET_DIR
+          rsync -avz -e "ssh -i private_key -o StrictHostKeyChecking=no" ~/englishVoteFront/dist/ $USERNAME@$SERVER:$TARGET_DIR
           rm private_key
