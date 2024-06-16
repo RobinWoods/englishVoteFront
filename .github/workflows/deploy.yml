@@ -1,0 +1,37 @@
+name: Deploy Vue.js App
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le workflow lors des pushs sur la branche main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Deploy to server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER: englishvote.derenty.net
+          USERNAME: robin
+          TARGET_DIR: /var/www/englishVote
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          rsync -avz -e "ssh -i private_key -o StrictHostKeyChecking=no" dist/ $USERNAME@$SERVER:$TARGET_DIR
+          rm private_key
