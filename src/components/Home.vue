@@ -66,8 +66,6 @@ export default {
 </script>
 
 <template>
-  <h1>Test Automatic Deployement</h1>
-
   <div class="contents">
     <Result v-if="!loading" :winners="videos" request="video"/>
     <Result v-if="!loading" :winners="videos" request="script"/>
